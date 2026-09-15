@@ -1,0 +1,64 @@
+
+// Force configuration properties for all plugins
+ext {
+    compileSdkVersion = 35
+    minSdkVersion = 21
+    targetSdkVersion = 35
+    flutter = [
+        compileSdkVersion: 35,
+        minSdkVersion: 21,
+        targetSdkVersion: 35,
+        versionCode: 1,
+        versionName: "1.0.0"
+    ]
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            project.android {
+                compileSdkVersion 35
+                if (namespace == null) {
+                    namespace project.group
+                }
+
+
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_21
+                    targetCompatibility JavaVersion.VERSION_21
+                }
+                tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+                    kotlinOptions {
+                        jvmTarget = "21"
+                    }
+                }
+                java {
+                    toolchain {
+                        languageVersion = JavaLanguageVersion.of(21)
+                    }
+                }
+
+
+            }
+        }
+    }
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

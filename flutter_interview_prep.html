@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Interview Prep Guide - English & Tamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --primary: #0284c7;
+            --primary-light: #f0f9ff;
+            --accent-eng: #0f766e;
+            --accent-eng-bg: #f0fdfa;
+            --accent-tam: #b45309;
+            --accent-tam-bg: #fffbeb;
+            --border-color: #e2e8f0;
+            --sidebar-width: 320px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #ffffff;
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-brand span {
+            color: var(--primary);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .toc-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .toc-link.active {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 3rem 4rem;
+            max-width: 1100px;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-eng {
+            background-color: var(--accent-eng-bg);
+            color: var(--accent-eng);
+        }
+
+        .badge-tam {
+            background-color: var(--accent-tam-bg);
+            color: var(--accent-tam);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            color: #0f172a;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .question-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .question-num {
+            color: var(--primary);
+        }
+
+        /* Answer Blocks */
+        .answer-block {
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .answer-eng {
+            background-color: var(--accent-eng-bg);
+            border-left: 4px solid var(--accent-eng);
+        }
+
+        .answer-tam {
+            background-color: var(--accent-tam-bg);
+            border-left: 4px solid var(--accent-tam);
+        }
+
+        .answer-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .label-eng {
+            color: var(--accent-eng);
+        }
+
+        .label-tam {
+            color: var(--accent-tam);
+        }
+
+        .answer-text {
+            font-size: 1.05rem;
+            color: #334155;
+            white-space: pre-line;
+        }
+
+        /* Float Action Button */
+        .float-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            z-index: 100;
+        }
+
+        .float-btn:hover {
+            background-color: #0369a1;
+            transform: scale(1.05);
+        }
+
+        /* Code snippets style */
+        code {
+            font-family: monospace;
+            background-color: rgba(0,0,0,0.05);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-size: 0.95rem;
+        }
+
+        /* Print Media Styles - optimized for PDF creation */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                display: block;
+            }
+
+            .sidebar, .float-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .question-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+
+            .answer-block {
+                page-break-inside: avoid;
+                background-color: #f8fafc !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+
+            .section-title {
+                page-break-before: always;
+            }
+
+            h1, .section-title {
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar T.O.C -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span>Flutter</span> Prep Guide
+        </div>
+        <ul class="toc-list">
+            <li class="toc-item"><a href="#widgets" class="toc-link">1. Stateless vs Stateful</a></li>
+            <li class="toc-item"><a href="#reload" class="toc-link">2. Reload vs Restart</a></li>
+            <li class="toc-item"><a href="#trees" class="toc-link">3. Flutter Widget Trees</a></li>
+            <li class="toc-item"><a href="#context" class="toc-link">4. BuildContext explained</a></li>
+            <li class="toc-item"><a href="#lifecycle" class="toc-link">5. Widget Lifecycle</a></li>
+            <li class="toc-item"><a href="#async" class="toc-link">6. Futures & Streams</a></li>
+            <li class="toc-item"><a href="#state" class="toc-link">7. State Management</a></li>
+            <li class="toc-item"><a href="#storage" class="toc-link">8. Local Caching</a></li>
+            <li class="toc-item"><a href="#channel" class="toc-link">9. Method Channels</a></li>
+            <li class="toc-item"><a href="#performance" class="toc-link">10. Optimization & Size</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+        <header>
+            <div class="badge-container">
+                <span class="badge badge-eng">📘 English Answers</span>
+                <span class="badge badge-tam">📙 தமிழ் விளக்கம்</span>
+            </div>
+            <h1>Flutter Interview Prep Guide</h1>
+            <div class="subtitle">Complete Core & Advanced Flutter Developer Interview Prep (Bilingual)</div>
+        </header>
+
+        <!-- SECTION 1 -->
+        <section id="widgets">
+            <h2 class="section-title">1. Stateless vs Stateful Widgets</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q1.</span>
+                    <span>What is the difference between a Stateless and a Stateful Widget?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"A **StatelessWidget** is immutable, meaning its properties cannot change once it is built. It relies only on the initial configuration information passed to it and cannot redraw itself dynamically. It is ideal for static UI elements like text, icons, or static buttons.
+
+Conversely, a **StatefulWidget** is mutable. It maintains a separate `State` object that persists across widget rebuilds. When the internal state changes (triggered by calling `setState()`), the widget schedules a rebuild to update the UI. It is used for dynamic elements like forms, sliders, search bars, or interactive animations."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"சுருக்கமாக சொன்னால்:
+* **StatelessWidget:** இதோட டிசைனை ஒருமுறை வரைந்த பிறகு, அதனுள்ளே இருக்கும் டேட்டாவை மாற்ற முடியாது (Immutable). உதாரணமா, ஒரு Static Text அல்லது Icon.
+* **StatefulWidget:** இதோட ஸ்டேட்டை (டேட்டாவை) ரன்-டைம்ல மாத்த முடியும் (Mutable). உதாரணமா, ஒரு செக்பாக்ஸ் செலக்ட் பண்ணும்போதோ அல்லது பட்டன் கிளிக் பண்ணி நம்பரை கூட்டும்போதோ `setState()` கால் பண்ணி ஸ்கிரீனை ரீ-பில்ட் (Rebuild) பண்ண வைக்கலாம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="reload">
+            <h2 class="section-title">2. Hot Reload vs Hot Restart</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q2.</span>
+                    <span>What is the difference between Hot Reload and Hot Restart in Flutter?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"**Hot Reload** injects updated source code files into the running Dart Virtual Machine (VM). It quickly rebuilds the widget tree without changing the state of the application. It takes around 1-2 seconds and is ideal for styling changes, UI tweaking, and fast iterations.
+
+**Hot Restart** loads the code changes into the Dart VM and restarts the entire application, resetting the state of all widgets to their initial values. It takes slightly longer than hot reload, and is necessary when code changes affect global states, static variables, main entry points (`main()`), or widget initializations."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"* **Hot Reload:** நம்ம கோடுல பண்ற மாற்றங்களை ரன்னிங் ஆப்ல உடனே பார்க்க உதவும். இது ஆப்போட தற்போதைய ஸ்டேட்டை (State) அழிக்காது (உதாரணமா, நீங்க லாகின் ஆகி 3வது பேஜ்ல இருந்தா, அதே பேஜ்ல இருப்பீங்க). வெறும் UI டிசைன் மாத்த மட்டும் இது போதும்.
+* **Hot Restart:** ஆப்பை முழுவதுமாக ரீஸ்டார்ட் பண்ணும். இதனால் ஆப்போட தற்போதைய ஸ்டேட் அழிந்து, ஆப் முதல் பேஜில் (Splash/Login) இருந்து ஆரம்பிக்கும். குளோபல் வேரியபிள்ஸ் அல்லது `main()` மெத்தடை மாற்றும்போது இது தேவைப்படும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="trees">
+            <h2 class="section-title">3. Flutter Architecture: The Three Trees</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q3.</span>
+                    <span>Explain the Widget, Element, and Render trees in Flutter and how they work together.</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Flutter manages rendering using three distinct trees:
+1. **Widget Tree:** Contains the blueprints of the UI. Widgets are configuration objects that are cheap to create, lightweight, and immutable.
+2. **Element Tree:** The coordinator tree. An Element represents the instantiation of a widget at a specific location in the tree. It manages widget lifecycles and controls UI updates.
+3. **Render Tree:** Contains the actual UI components that handle layout, sizing, and painting on the screen (`RenderObject`). Creating these is computationally expensive.
+
+When a widget changes, Flutter uses the Element tree to compare the old widget configuration with the new one. If only parameters change, Flutter updates the existing `RenderObject` without rebuilding the entire render tree, which ensures high performance (60/120 FPS)."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"பிளட்டர் ஸ்கிரீனை வரைவதற்கு பேக்ரவுண்ட்ல 3 மரங்களை (Trees) பயன்படுத்துது:
+1. **Widget Tree:** இது ஒரு ப்ளூபிரிண்ட் (Blueprint). நாம கோடுல எழுதுற விட்ஜெட்கள் எல்லாமே இதில்தான் இருக்கும். இது ரொம்ப லைட்வெயிட்.
+2. **Element Tree:** இது இடைத்தரகர் (Coordinator). விட்ஜெட் ட்ரீயையும் ரெண்டர் ட்ரீயையும் இணைக்கும் பாலம். எந்த விட்ஜெட் மாறி இருக்குன்னு இதுதான் கண்டுபிடிக்கும்.
+3. **Render Tree:** இதுதான் உண்மையான ஸ்கிரீன் பெயிண்டர். இதுதான் ஸ்கிரீன்ல பிக்சல்களை வரையும்.
+கோடுல ஒரு சின்ன டெக்ஸ்ட் மாறும்போது, பிளட்டர் முழு ஸ்கிரீனையும் அழிக்காமல், எலிமெண்ட் ட்ரீயோட உதவியோட மாறிய டெக்ஸ்ட்டை மட்டும் Render Tree-ல் அப்டேட் பண்ணும். அதனால்தான் பிளட்டர் ஆப்ஸ் ரொம்ப ஸ்பீடா இருக்கு."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="context">
+            <h2 class="section-title">4. Understanding BuildContext</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q4.</span>
+                    <span>What is BuildContext in Flutter, and why is it important?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"**BuildContext** is a handle to the location of a widget within the Widget Tree. Every widget has its own `BuildContext`, which is passed to its `build()` method. 
+
+It is important because it acts as the widget's portal to interact with the rest of the tree. For example, it is used to:
+* Navigate to new screens (`Navigator.of(context)`).
+* Locate themes or media sizes (`Theme.of(context)` or `MediaQuery.of(context)`).
+* Access inherited widgets or state managers higher up in the hierarchy."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"**BuildContext** என்பது ஒரு விட்ஜெட், விட்ஜெட் மரத்தில் (Widget Tree) எங்கே அமைந்திருக்கிறது என்பதைக் காட்டும் **முகவரி (Address / Location)** ஆகும்.
+* ஒரு விட்ஜெட்டுக்கு தீம் கலர் எடுக்கணும்னாலோ (`Theme.of(context)`), அல்லது ஸ்கிரீன் சைஸ் வேணும்னாலோ (`MediaQuery.of(context)`), அல்லது வேறொரு ஸ்கிரீனுக்கு போகணும்னாலோ (`Navigator.of(context)`) இந்த `context`-ஐ வச்சுத்தான் பிளட்டர் அந்த தகவலைப் பெற முடியும். சுருக்கமா, இது விட்ஜெட்களின் அட்ரஸ் கார்டு."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section id="lifecycle">
+            <h2 class="section-title">5. StatefulWidget Lifecycle</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q5.</span>
+                    <span>Explain the lifecycle methods of a StatefulWidget.</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"A `StatefulWidget` goes through the following lifecycle stages:
+1. **createState():** Creates the mutable State object for this widget.
+2. **initState():** The first method called after the state is created. Ideal for one-time initializations (e.g., controller initialization, API fetch).
+3. **didChangeDependencies():** Called immediately after `initState()` and when dependency objects (like InheritedWidgets/Themes) change.
+4. **build():** Called multiple times to render the UI on the screen.
+5. **didUpdateWidget():** Triggered when the parent widget changes configuration and passes new data to this widget.
+6. **deactivate():** Called when the state object is temporarily removed from the tree.
+7. **dispose():** Triggered when the widget is permanently destroyed. Used to close streams, animations, and controllers to avoid memory leaks."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஒரு StatefulWidget-ன் வாழ்நாள் படிகள் (Lifecycle):
+1. **createState():** விட்ஜெட்டோட ஸ்டேட்டை உருவாக்குகிறது.
+2. **initState():** ஆப் தொடங்கும்போதே ரன் ஆகும் முதல் மெத்தட். ஒன்-டைம் செட்டப் (உதாரணமா, Text Controller செட் பண்ண, API கால் பண்ண) இதுதான் சரியான இடம்.
+3. **didChangeDependencies():** initState-க்கு அப்புறம் ரன் ஆகும். தீம்கள் மாறும்போது அப்டேட் ஆகும்.
+4. **build():** ஸ்கிரீன்ல டிசைனை வரைய இது அடிக்கடி கால் ஆகும்.
+5. **didUpdateWidget():** பேரண்ட் விட்ஜெட்ல எதாவது மாறினா, இந்த விட்ஜெட்டை அப்டேட் பண்ணும்.
+6. **dispose():** இந்த ஸ்கிரீன் அழியும்போது (Close ஆகும்போது) ரன் ஆகும். கண்ட்ரோலர்கள், ஸ்டிரீம்களை க்ளோஸ் பண்ணி மெமரி லீக் (Memory leak) ஆகாம தடுக்க இது பயன்படுது."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section id="async">
+            <h2 class="section-title">6. Asynchronous Dart: Future vs Stream</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q6.</span>
+                    <span>What is the difference between a Future and a Stream in Dart?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Both `Future` and `Stream` represent asynchronous computations in Dart, but they differ in how they deliver data:
+
+* **Future:** Represents a single asynchronous value or error that will be delivered in the future. Once a Future completes (either resolving to a value or returning an error), it stops. Examples: Fetching an API response, checking login credentials, or reading a local file.
+
+* **Stream:** Represents a continuous sequence of asynchronous events. It can yield multiple values over time and stays open until it is closed. Examples: Listening to a real-time chat database (Firebase Firestore), tracking live GPS locations, or reading input from a WebSocket connection."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"* **Future:** இது ஒருமுறை மட்டுமே டேட்டாவைத் தரும். ஒரு ரிக்வெஸ்ட் அனுப்பி அதுக்கு பதில் வந்ததும் முடிந்துவிடும் (Single response). உதாரணமா, ஒரு API-ல இருந்து டேட்டா எடுப்பது அல்லது ஒரு லோக்கல் பைலை வாசிப்பது.
+* **Stream:** இது ஒரு பைப்லைன் போல தொடர்ந்து டேட்டாக்களை அனுப்பிக் கொண்டே இருக்கும் (Multiple responses over time). உதாரணமா, சாட் ஆப்ல மெசேஜ்கள் தொடர்ந்து வருவது அல்லது லைவ் லொகேஷன் மேப்ல அப்டேட் ஆவது."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section id="state">
+            <h2 class="section-title">7. State Management & GetX</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q7.</span>
+                    <span>Why is State Management required, and how does GetX handle it?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"State Management is crucial to separate the UI code from business logic and to share data efficiently across different screens without manually passing it down through constructors (prop drilling).
+
+**GetX** handles state management in two ways:
+1. **Simple State Management (GetBuilder):** Highly performant, uses manually triggered updates (`update()`) and uses minimal memory.
+2. **Reactive State Management (Obx / Rx):** Uses observable variables (like `var count = 0.obs;`). When the variable value changes, only the UI elements wrapped inside `Obx` that consume that variable are rebuilt automatically, minimizing redraw overhead."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஏன் ஸ்டேட் மேனேஜ்மென்ட் வேணும்னா: ஒரு பேஜ்ல இருக்குற டேட்டாவை (உதாரணமா, லாகின் யூசர் ஐடி) இன்னொரு பேஜ்க்கு கொண்டு போகவும், டிசைனையும் கோடிங் லாஜிக்கையும் தனித்தனியா பிரிக்கவும் இது தேவை.
+**GetX-ல் இது எப்படி வேலை செய்யும்:**
+* **Simple (GetBuilder):** ரொம்ப குறைவான மெமரி பயன்படுத்தும். நாம `update()`னு கோடுல சொல்லும்போது மட்டும் UI அப்டேட் ஆகும்.
+* **Reactive (Obx):** ஒரு வேரியபிளை `obs` (Observable) ஆக மாற்றி, அதை `Obx` விட்ஜெட்க்குள்ள போட்டா, அந்த வேரியபிள் மாறும்போதெல்லாம் UI தானாகவே நொடிப் பொழுதில் அப்டேட் ஆகிடும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section id="storage">
+            <h2 class="section-title">8. Local Caching: SharedPreferences vs Sqflite</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q8.</span>
+                    <span>What is the difference between SharedPreferences and Sqflite, and when should you use each?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"**SharedPreferences:**
+* **What it is:** A simple key-value pair local storage. It runs asynchronously but caches values in memory.
+* **Use case:** Small, non-sensitive settings (e.g., user theme preference, login state token, language settings).
+
+**Sqflite (SQLite):**
+* **What it is:** A local relational SQL database. It supports full SQL queries, indexes, joins, and structured tables.
+* **Use case:** Large datasets, relational records, offline-first syncing pipelines (like the Serviceman job checklist, offline bookings, or message caches)."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"* **SharedPreferences:** இது வெறும் Key-Value முறையில் டேட்டாவை சேமிக்கும். (உதாரணமா: `isLoggedIn: true`, `theme: dark`). சிறிய அளவிலான செட்டிங்ஸ் மற்றும் டோக்கன் சேமிக்க மட்டுமே இதைப் பயன்படுத்த வேண்டும்.
+* **Sqflite (SQLite):** இது போனுக்குள்ளேயே இருக்கும் ஒரு மினி SQL டேட்டாபேஸ். இதில டேபிள்கள் உருவாக்கலாம், ரிலேஷன்ஸ் எழுதலாம், குரிஸ் (Queries) ரன் பண்ணலாம். ஆப்ல நிறைய ஆப்லைன் டேட்டாக்களை சேமிக்க (உதாரணமா: சாட் ஹிஸ்டரி, ஆப்லைன் ஜாப் லிஸ்ட்) இதைப் பயன்படுத்துவோம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9 -->
+        <section id="channel">
+            <h2 class="section-title">9. Platform Channels (Method Channels)</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q9.</span>
+                    <span>What are Method Channels, and how do they work in Flutter?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"**Method Channels** are a mechanism to send messages and invoke methods between Flutter Dart code and native host platforms (Kotlin/Java on Android, Swift/Objective-C on iOS).
+
+It works on a client-server architecture:
+1. Dart invokes a method on a named channel.
+2. The platform-specific native handler receives the request, runs the native platform APIs (like battery levels, bluetooth status, or native system dialogs).
+3. The native code returns a result back through the channel to Dart asynchronously."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"**Method Channels** என்பது பிளட்டர் குறியீட்டையும் (Dart), போனின் சொந்த நேட்டிவ் சிஸ்டம்களையும் (Android-ல் Kotlin/Java, iOS-ல் Swift) இணைக்கும் ஒரு பாலம் ஆகும்.
+* பிளட்டர்ல இல்லாத சில ஸ்பெஷல் ஃபீச்சர்கள் (உதாரணமா: போனின் பேட்டரி லெவல் செக் செய்வது, ப்ளூடூத் கனெக்ட் செய்வது) நமக்கு வேணும்னா, இந்த மெத்தட் சேனல் வழியா நேட்டிவ் மொபைல் கோடோடு கம்யூனிகேட் பண்ணி அதை செய்ய வைக்கலாம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10 -->
+        <section id="performance">
+            <h2 class="section-title">10. Performance Tuning & APK Size</h2>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q10.</span>
+                    <span>How do you optimize app performance and reduce APK size in Flutter?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"To optimize performance:
+* Use **`const` constructors** wherever possible so Flutter doesn't rebuild unchanged widgets.
+* Avoid heavy processing in the `build()` method. Use **Isolates** for CPU-intensive tasks.
+* Use lazy-loaded lists (`ListView.builder`) instead of importing all lists at once.
+* Use image compression utilities so that UI thread doesn't choke during high-res image rendering.
+
+To reduce APK size:
+* Build App Bundles (`.aab`) instead of raw APKs (`flutter build appbundle`).
+* Leverage **Tree Shaking** (`--no-tree-shake-icons` check) to remove unused assets and fonts.
+* Compress resources (images, sounds) and avoid heavy external packages."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஆப்பின் ஸ்பீடை கூட்ட (Performance):
+* மாறாத விட்ஜெட்களுக்கு முன்னால் **`const`** பயன்படுத்தணும்.
+* `build()` மெத்தட்குள்ள பெரிய கணக்கீடுகளை செய்யக்கூடாது.
+* நீண்ட லிஸ்ட்டுகளுக்கு `ListView.builder` பயன்படுத்தணும்.
+
+ஆப் சைஸை குறைக்க (APK Size):
+* ப்ளே ஸ்டோர்க்கு அனுப்பும்போது `flutter build appbundle` (AAB) ஆக பில்ட் செய்ய வேண்டும்.
+* தேவையில்லாத ஃபான்ட்கள் மற்றும் ஐகான்களை நீக்க **Tree Shaking** ஐப் பயன்படுத்த வேண்டும்.
+* படங்களை அப்லோட் அல்லது லோக்கல் அசெட்டில் பயன்படுத்தும்போது கம்ப்ரெஸ் செய்து பயன்படுத்த வேண்டும்."</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Print Button -->
+    <button class="float-btn" onclick="window.print()">
+        🖨️ Print / Save as PDF
+    </button>
+
+    <script>
+        // Active Sidebar T.O.C highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter 1-Year Exp Interview Prep & Publishing Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --primary: #0284c7;
+            --primary-light: #f0f9ff;
+            --accent-eng: #0f766e;
+            --accent-eng-bg: #f0fdfa;
+            --accent-tam: #b45309;
+            --accent-tam-bg: #fffbeb;
+            --border-color: #e2e8f0;
+            --sidebar-width: 320px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #ffffff;
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-brand span {
+            color: var(--primary);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .toc-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .toc-link.active {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 3rem 4rem;
+            max-width: 1100px;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-eng {
+            background-color: var(--accent-eng-bg);
+            color: var(--accent-eng);
+        }
+
+        .badge-tam {
+            background-color: var(--accent-tam-bg);
+            color: var(--accent-tam);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .question-header {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .question-num {
+            color: var(--primary);
+        }
+
+        /* Answer Blocks */
+        .answer-block {
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .answer-eng {
+            background-color: var(--accent-eng-bg);
+            border-left: 4px solid var(--accent-eng);
+        }
+
+        .answer-tam {
+            background-color: var(--accent-tam-bg);
+            border-left: 4px solid var(--accent-tam);
+        }
+
+        .answer-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .label-eng {
+            color: var(--accent-eng);
+        }
+
+        .label-tam {
+            color: var(--accent-tam);
+        }
+
+        .answer-text {
+            font-size: 1rem;
+            color: #334155;
+            white-space: pre-line;
+        }
+
+        /* Float Action Button */
+        .float-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            z-index: 100;
+        }
+
+        .float-btn:hover {
+            background-color: #0369a1;
+            transform: scale(1.05);
+        }
+
+        code {
+            font-family: monospace;
+            background-color: rgba(0,0,0,0.06);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-size: 0.95rem;
+        }
+
+        /* Print Media Styles */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                display: block;
+            }
+
+            .sidebar, .float-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .question-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+
+            .answer-block {
+                page-break-inside: avoid;
+                background-color: #f8fafc !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+
+            .section-title {
+                page-break-before: always;
+            }
+
+            h1, .section-title {
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar T.O.C -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span>Flutter</span> 1-Year Prep
+        </div>
+        <ul class="toc-list">
+            <li class="toc-item"><a href="#dart-basics" class="toc-link">1. Null Safety & Keywords</a></li>
+            <li class="toc-item"><a href="#advanced-dart" class="toc-link">2. Isolates & Threading</a></li>
+            <li class="toc-item"><a href="#notifications" class="toc-link">3. FCM Push Notifications</a></li>
+            <li class="toc-item"><a href="#securing-data" class="toc-link">4. Secure Local Storage</a></li>
+            <li class="toc-item"><a href="#play-store" class="toc-link">5. Google Play Publish</a></li>
+            <li class="toc-item"><a href="#app-store" class="toc-link">6. Apple App Store Publish</a></li>
+            <li class="toc-item"><a href="#versioning" class="toc-link">7. App Versioning</a></li>
+            <li class="toc-item"><a href="#build-errors" class="toc-link">8. iOS CocoaPods Errors</a></li>
+            <li class="toc-item"><a href="#env-keys" class="toc-link">9. Managing API Keys</a></li>
+            <li class="toc-item"><a href="#testing-tracks" class="toc-link">10. Play Console Tracks</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+        <header>
+            <div class="badge-container">
+                <span class="badge badge-eng">📘 English Answers</span>
+                <span class="badge badge-tam">📙 தமிழ் விளக்கம்</span>
+            </div>
+            <h1>Flutter 1-Year Experience Prep</h1>
+            <div class="subtitle">Focused Interview Q&A + App Store & Google Play Publishing Guide</div>
+        </header>
+
+        <!-- SECTION 1 -->
+        <section id="dart-basics">
+            <h2 class="section-title">1. Dart Basics: Null Safety, Const & Final</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q1.</span>
+                    <span>Explain Sound Null Safety in Dart. What is the difference between `?`, `!`, `late`, and `required`?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Sound Null Safety in Dart guarantees that variables cannot contain a `null` value unless you explicitly allow it. This helps eliminate common null-pointer exceptions at runtime.
+
+* **`?` (Nullable operator):** Declares that a variable can be null (e.g., `String? name`).
+* **`!` (Null assertion operator):** Forcefully tells the compiler that a nullable value is definitely NOT null at this point (use with caution, as it throws an error if it is null).
+* **`late`:** Tells the compiler that the variable will be initialized later, but before it is accessed (ideal for controller setup in `initState()`).
+* **`required`:** Used in constructor parameters to enforce that the caller must pass a value for this field."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"டார்ட்டில் **Null Safety** என்பது எந்த வேரியபிளும் தேவையில்லாமல் `null` ஆக மாறுவதைத் தடுத்து ஆப் கிராஷ் ஆவதைத் தடுக்கும் ஒரு பாதுகாப்பு அம்சமாகும்.
+* **`?` (Nullable):** `String? name` என்று போட்டால், அந்த வேரியபிளில் டெக்ஸ்ட்டும் இருக்கலாம் அல்லது `null` ஆகவும் இருக்கலாம் என அர்த்தம்.
+* **`!` (Force Unwrapping):** `name!` என்று போட்டால், 'கண்டிப்பாக இதில் டேட்டா இருக்கு, பயப்படாமல் ரன் பண்ணு' என்று கம்பைலருக்கு உத்தரவாதம் தருவது. ஒருவேளை அது null ஆக இருந்தால் ஆப் கிராஷ் ஆகிவிடும்.
+* **`late`:** 'இப்போது இதற்கு வேல்யூ இல்லை, ஆனால் இதை பயன்படுத்தும் போது நான் வேல்யூ செட் பண்ணியிருப்பேன்' என்று சொல்வது.
+* **`required`:** ஒரு விட்ஜெட் அல்லது கிளாஸ் கூப்பிடும்போது கண்டிப்பாக இந்த வேல்யூவை அனுப்ப வேண்டும் என்று கட்டாயப்படுத்துவது."</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q2.</span>
+                    <span>What is the difference between `const`, `final`, and `var` in Dart?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"* **`var`:** A dynamically typed or type-inferred variable whose value can be reassigned later.
+* **`final`:** A single-assignment variable. Once initialized, its value cannot be changed. Its value is determined at **runtime** (e.g., fetching current time: `final now = DateTime.now()`).
+* **`const`:** A compile-time constant. Its value must be defined and known at **compile-time** (e.g., `const pi = 3.14`). A `const` variable is implicitly `final` but not vice versa. Using `const` in UI widgets prevents unnecessary rebuilds, optimizing memory."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"* **`var`:** சாதாரண வேரியபிள். இதன் வேல்யூவை எப்போது வேண்டுமானாலும் மாற்றலாம்.
+* **`final`:** ஒருமுறை வேல்யூ செட் பண்ணிய பின் மாற்ற முடியாது. இதன் வேல்யூ ஆப் ஓடும்போதுதான் (**Runtime**) முடிவாகும் (உதாரணமா, சர்வரில் இருந்து வரும் டேட்டா, அல்லது தற்போதைய நேரம்).
+* **`const`:** கோடு கம்பைல் ஆகும் போதே (**Compile-time**) இதன் வேல்யூ தெரிந்திருக்க வேண்டும் (உதாரணமா: `const pi = 3.14`). மாறாத UI விட்ஜெட்களுக்கு முன்னால் `const` போடுவதால் ஆப்பின் வேகம் அதிகரிக்கும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="advanced-dart">
+            <h2 class="section-title">2. Multithreading & Isolates</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q3.</span>
+                    <span>What is an Isolate in Dart, and how does it differ from traditional multi-threading?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Dart is a single-threaded language that runs on an Event Loop. To perform heavy operations without blocking the main UI thread (causing frame drops or jank), Dart uses **Isolates**.
+
+Unlike traditional multi-threading where threads share the same memory space (which can lead to lock/race conditions), **Isolates do not share memory**. Each Isolate has its own memory heap and runs its own event loop. They communicate solely by sending messages over ports (`ReceivePort` and `SendPort`). This makes concurrency safer and prevents shared-memory bugs."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"டார்ட் (Dart) அடிப்படையில் ஒரே ஒரு த்ரெட் (Thread) மூலம் மட்டுமே இயங்கும். 
+* பெரிய இமேஜ் ப்ராசஸிங், ஃபைல் கம்ப்ரெஷன் போன்ற கனமான வேலைகளை மெயின் த்ரெட்டில் செய்தால் ஸ்கிரீன் ஹேங் ஆகும்.
+* அதைத் தடுக்க **Isolates** பயன்படுத்தப்படுகிறது. இது ஒரு தனி அறை போல இயங்கும்.
+* மல்டி-த்ரெடிங் போல இல்லாமல், இரண்டு Isolates தங்களுக்குள் மெமரியை பகிர்ந்து கொள்ளாது. இதனால் டேட்டா குழப்பங்கள் (Race conditions) வராது. அவை தங்களுக்குள் தகவல்களை போர்ட் (`SendPort`/`ReceivePort`) வழியாக மட்டுமே அனுப்பிக் கொள்ளும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="notifications">
+            <h2 class="section-title">3. Firebase Cloud Messaging (FCM)</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q4.</span>
+                    <span>How do you handle Push Notifications in Flutter for both foreground and background states?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"We use **Firebase Cloud Messaging (FCM)** along with the `firebase_messaging` package. Push notifications have three states:
+1. **Foreground:** The app is open and visible. We listen via `FirebaseMessaging.onMessage.listen()`. To display a visual notification banner, we must use a local notification manager like `flutter_local_notifications`.
+2. **Background:** The app is minimized. Notifications are handled automatically by the OS system tray. If we need to process background logic, we register a static global function using `FirebaseMessaging.onBackgroundMessage()`.
+3. **Terminated:** The app is closed. When a user clicks the notification banner, we retrieve the payload in `initState()` using `FirebaseMessaging.instance.getInitialMessage()` to route the user to the correct page."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"புஷ் நோட்டிபிகேஷன்ஸ்-க்கு **FCM** பயன்படுத்தப்படுகிறது. இது மூன்று நிலைகளில் கையாளப்படும்:
+1. **Foreground (ஆப் ஓப்பனில் இருக்கும்போது):** நோட்டிபிகேஷன் வரும்போது சத்தம் வராது. அதனால் `flutter_local_notifications` பேக்கேஜ் மூலம் நாமாகவே ஒரு பேனர் காட்ட வேண்டும்.
+2. **Background (ஆப் மினிமைஸ் ஆகி இருக்கும்போது):** போனின் நோட்டிபிகேஷன் பாரில் தானாகவே மெசேஜ் விழுந்துவிடும். பேக்ரவுண்டில் கோடு ரன் செய்ய `onBackgroundMessage` செட் செய்ய வேண்டும்.
+3. **Terminated (ஆப் முழுமையாக மூடப்பட்டு இருக்கும்போது):** கஸ்டமர் நோட்டிபிகேஷனை கிளிக் செய்து ஆப்பை திறக்கும்போது, `getInitialMessage` மூலம் குறிப்பிட்ட பேஜுக்கு (உதாரணமாக: சாட் ஸ்கிரீன்) நேவிகேட் செய்ய வேண்டும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="securing-data">
+            <h2 class="section-title">4. Secure Local Storage</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q5.</span>
+                    <span>How do you secure sensitive data like API tokens or password credentials in a Flutter app?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"We should never store sensitive data like authentication tokens, passwords, or payment variables in standard SharedPreferences because it saves data in plain text XML/JSON which can be easily inspected on rooted or jailbroken devices.
+
+Instead, we use the **`flutter_secure_storage`** package. It utilizes platform-secure storage mechanisms:
+* **Android:** Uses **Keystore** encryption to encrypt keys/values before writing to Shared Preferences.
+* **iOS:** Saves data directly to the hardware-secured **Keychain** service.
+This prevents data leakage even if the device's system file access is compromised."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"கஸ்டமரின் பாஸ்வேர்டு, லாகின் டோக்கன் போன்றவற்றை சாதாரண Shared Preferences-ல் சேமிக்கக் கூடாது, ஏனெனில் அதை எளிதாக ஹேக் செய்து படித்து விடலாம்.
+* அதற்குப் பதிலாக **`flutter_secure_storage`** பயன்படுத்த வேண்டும்.
+* இது ஆண்ட்ராய்டில் **Keystore** மற்றும் ஐபோனில் **Keychain** என்ற அதிநவீன மொபைல் செக்யூரிட்டி அமைப்புகள் மூலம் டேட்டாவை என்க்ரிப்ட் (Encrypt) செய்து பாதுகாப்பாகச் சேமிக்கும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section id="play-store">
+            <h2 class="section-title">5. Google Play Store Publishing</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q6.</span>
+                    <span>Explain the step-by-step process of signing and publishing a Flutter app to the Google Play Store.</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"The steps to publish an Android release build are:
+1. **Generate Upload Keystore:** Run the Java `keytool` command in the terminal to generate a secure `.jks` (Keystore) file:
+   `keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload`
+2. **Configure key.properties:** Create a `key.properties` file in `android/` directory containing the keystore path, alias, and passwords.
+3. **Configure build.gradle:** Modify `android/app/build.gradle` to load `key.properties` and add `signingConfigs` matching the release configurations.
+4. **Build App Bundle:** Run `flutter build appbundle` to generate a compressed `.aab` file located in `build/app/outputs/bundle/release/`.
+5. **Upload to Google Play Console:** Create an application on the Play Console, set up the store listing, upload the `.aab` file to the Internal or Production track, complete the content rating questionnaires, and submit for review."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஆண்ட்ராய்டு ஆப்பை பிளே ஸ்டோரில் போடும் வழிமுறைகள்:
+1. **Keystore உருவாக்குதல்:** டெர்மினலில் `keytool` கமாண்ட் ரன் பண்ணி ஒரு செக்யூர் `.jks` ஃபைலை உருவாக்க வேண்டும்.
+2. **key.properties செட்டப்:** ஆப்போட பாஸ்வேர்டு மற்றும் கீஸ்டோர் பாத் போன்ற விபரங்களை `key.properties` ஃபைலில் எழுத வேண்டும்.
+3. **build.gradle கான்பிகர்:** `signingConfigs` பிளாக்கில் இந்த கீஸ்டோர் விபரங்களை இணைக்க வேண்டும்.
+4. **App Bundle பில்ட்:** `flutter build appbundle` என்று ரன் பண்ணி `.aab` கோப்பை உருவாக்க வேண்டும் (இதன் சைஸ் ரொம்ப கம்மியாக இருக்கும்).
+5. **Play Console அப்லோடு:** கூகுள் பிளே கன்சோலில் ஆப் கிரியேட் பண்ணி, விபரங்களை எழுதி, இந்த `.aab` ஃபைலை அப்லோட் செய்து ரிவியூவிற்கு அனுப்ப வேண்டும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section id="app-store">
+            <h2 class="section-title">6. Apple App Store Publishing</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q7.</span>
+                    <span>Explain the step-by-step process of publishing a Flutter app to the Apple App Store.</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"The steps to publish an iOS app are:
+1. **Apple Developer Program:** Enroll in the Apple Developer Program ($99/year).
+2. **Certificates & Profiles (App Store Connect):** Generate an **iOS Distribution Certificate** and a **Provisioning Profile** matching the app's Bundle Identifier.
+3. **Configure Xcode Settings:** Open the `ios/Runner.xcworkspace` in Xcode, select the Runner target, set the Signing & Capabilities tab to 'Automatically manage signing' or import the provisioning profiles manually.
+4. **Archive Build:** Select 'Any iOS Device (arm64)' as build destination. Go to Xcode menu -> **Product > Archive**.
+5. **Distribute App:** Once the archive succeeds, click 'Distribute App' inside Organizer and upload to App Store Connect.
+6. **TestFlight & Review:** Open App Store Connect, configure metadata, release to TestFlight for internal testing, and submit the build for official App Store review."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஐபோன் ஆப்பை ஆப் ஸ்டோரில் போடும் வழிமுறைகள்:
+1. **Apple Developer Account:** முதலில் ஒரு ஆப்பிள் டெவலப்பர் அக்கவுண்ட் வாங்க வேண்டும் ($99/வருடம்).
+2. **Provisioning Profiles & Certificates:** ஆப்பிள் டெவலப்பர் போர்ட்டலில் சென்று சர்டிபிகேட் மற்றும் ப்ரோவிஷனிங் ப்ரொஃபைல் ஜெனரேட் செய்ய வேண்டும்.
+3. **Xcode செட்டப்:** Xcode-ல் ஆப்பை ஓப்பன் செய்து Bundle ID மற்றும் சர்டிபிகேட்களை மேட்ச் செய்ய வேண்டும்.
+4. **Archive செய்தல்:** Xcode-ல் **Product -> Archive** கொடுத்து ஆப்பை பில்ட் செய்ய வேண்டும்.
+5. **Distribute App:** பில்ட் முடிந்ததும் 'Distribute App' கொடுத்து ஆப் ஸ்டோர் கன்சோலுக்கு அப்லோட் செய்ய வேண்டும்.
+6. **TestFlight & Submit:** கன்சோலில் அப்லோட் ஆனதும் **TestFlight** மூலம் டெஸ்ட் செய்யலாம், பின்னர் மெட்டாடேட்டா எழுதி ரிவியூவிற்கு அனுப்பலாம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section id="versioning">
+            <h2 class="section-title">7. App Versioning</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q8.</span>
+                    <span>How do you handle App Versioning in Flutter? Where do you change it?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"App Versioning in Flutter is configured in the **`pubspec.yaml`** file via the `version` property, formatted as `versionName+versionCode` (e.g., `version: 1.0.4+5`).
+
+* **Version Name (`1.0.4`):** The semantic version displayed to the users on stores (Major.Minor.Patch).
+* **Version Code (`5`):** An incremental integer code used internally by App Store and Play Store to determine update sequences. Play Store will reject builds upload with a version code equal to or lower than existing builds.
+During compilation, Flutter automatically injects these version properties into Android's `local.properties` and iOS's `Info.plist`."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஆப்பின் வெர்ஷனை மாற்ற நாம் **`pubspec.yaml`** ஃபைலில் உள்ள `version` என்ற வரியைப் பயன்படுத்துவோம்.
+உதாரணமாக: `version: 1.0.2+4`
+* **`1.0.2` (Version Name):** இது கஸ்டமர்களுக்கு ஸ்டோரில் காட்டப்படும் வெர்ஷன்.
+* **`4` (Version Code):** இது பிளே ஸ்டோருக்கும் ஆப் ஸ்டோருக்கும் மட்டுமே தெரியும். அடுத்த அப்டேட் போடும்போது கண்டிப்பாக இதை 5, 6 என்று கூட்டிக் கொண்டே போக வேண்டும். இல்லாவிட்டால் ஸ்டோர் அப்லோடை ரிஜெக்ட் செய்துவிடும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section id="build-errors">
+            <h2 class="section-title">8. CocoaPods & iOS Build Errors</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q9.</span>
+                    <span>What is CocoaPods? How do you resolve common iOS build errors like "Podfile out of sync" or Pod compilation failures?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"**CocoaPods** is a dependency manager for iOS/macOS projects. When we add Flutter packages with native iOS dependencies, CocoaPods fetches and links those libraries to the Xcode workspace.
+
+To resolve common Podfile sync or pod build compilation errors, the steps are:
+1. Navigate to the `ios/` folder: `cd ios`
+2. Remove cached build and lock files:
+   `rm -rf Podfile.lock PodsRunner.xcworkspace/ xcuserdata/`
+3. Run pod cleanup: `pod deintegrate`
+4. Reinstall pods: `pod install` (or `arch -x86_64 pod install` if running on Apple Silicon M-series Mac with Rosetta emulation).
+5. Clean Flutter build cache: `flutter clean` and rebuild."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"**CocoaPods** என்பது ஐபோன் (iOS) ஆப்பிற்கு தேவையான வெளிப்பொடான லைப்ரரிகளை (Dependencies) மேனேஜ் செய்யும் ஒரு டூல் ஆகும்.
+ஐபோன் பில்டில் எர்ரர் வந்தால் அதை சரி செய்யும் முறை:
+1. `ios` ஃபோல்டருக்குள் செல்ல வேண்டும்.
+2. `Podfile.lock` மற்றும் `Pods` ஃபோல்டரை டெலிட் செய்ய வேண்டும்.
+3. டெர்மினலில் `pod deintegrate` கொடுத்து கிளீன் செய்ய வேண்டும்.
+4. பின்னர் `pod install` கொடுத்து புதிய பாட்களை இன்ஸ்டால் செய்ய வேண்டும்.
+5. இறுதியாக `flutter clean` செய்து மீண்டும் பில்ட் போட்டால் 90% எர்ரர்கள் சரியாகிவிடும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9 -->
+        <section id="env-keys">
+            <h2 class="section-title">9. Managing API Keys Safely</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q10.</span>
+                    <span>How do you manage API keys and separate configurations for Development and Production environments in Flutter?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"We manage API keys and environments using either **`flutter_dotenv`** configuration files or via Dart compile-time defines (`--dart-define`).
+
+* **`--dart-define` (Recommended):** We define environment configurations dynamically during compilation, keeping them out of source control.
+  `flutter run --dart-define=API_URL=https://api.prod.com --dart-define=IS_PROD=true`
+  Inside Dart, we retrieve it via: `const String.fromEnvironment('API_URL')`.
+* **`.env` files:** We create `.env.dev` and `.env.prod` files containing API keys, add them to `.gitignore`, and load them at runtime using `dotenv.load(fileName: '.env.prod')` depending on the environment."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஆப்பின் டெவலப்மெண்ட் (Dev API) மற்றும் ப்ரொடக்‌ஷன் (Live API) கீகளைப் பிரித்து வைக்க இரண்டு வழிகள் உள்ளன:
+1. **`.env` ஃபைல்கள்:** `.env.dev` மற்றும் `.env.prod` என்று கோப்புகளை உருவாக்கி, அதில் API கீகளைப் போட்டு `.gitignore`-ல் சேர்த்து விடுவோம் (இதனால் கிட்ஹப்பிற்கு கோடு போகாது).
+2. **`--dart-define`:** ஆப்பை பில்ட் செய்யும்போது கமாண்ட் லைனில் `--dart-define=API_URL=https://api.com` என்று கொடுத்து, குறியீட்டினுள் `String.fromEnvironment` மூலம் அதை எடுத்துப் பயன்படுத்துவோம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10 -->
+        <section id="testing-tracks">
+            <h2 class="section-title">10. Play Console Testing Tracks</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q11.</span>
+                    <span>What is the difference between Internal, Closed, and Production tracks in Google Play Console?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Google Play Console provides different testing tracks to validate app releases:
+
+* **Internal Testing:** The fastest track. It is restricted to up to 100 internal testers. Builds do not require full Google reviews and are available to download via link in a few minutes.
+* **Closed Testing (Alpha):** Used to test builds with a wider audience via email groups. Currently, Google requires new personal developer accounts to run a Closed track with at least **20 testers active for 14 days** before applying for production release.
+* **Production:** The live release track. Builds undergo complete Google App reviews and are published publicly on the Google Play Store for all users."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"கூகுள் பிளே ஸ்டோரில் ஆப் வெளியிடும் மூன்று முக்கிய டிராக்குகள் (Tracks):
+* **Internal Testing:** மிக விரைவானது. 100 டெஸ்டர்கள் வரை மட்டுமே சேர்க்கலாம். இதற்கு கூகுள் ரிவியூ தேவையில்லை, அப்லோட் செய்த 5 நிமிடங்களில் லிங்க் மூலம் டவுன்லோட் செய்து டெஸ்ட் செய்யலாம்.
+* **Closed Testing:** குறிப்பிட்ட குழுவினருக்கு மட்டும் டெஸ்ட் செய்ய அனுப்பலாம். (குறிப்பு: புதிய டெவலப்பர்கள் தங்கள் ஆப்பை லைவ் கொண்டு போக கண்டிப்பாக 20 டெஸ்டர்களை வைத்து 14 நாட்கள் டெஸ்ட் செய்ய வேண்டும் என்ற கூகுளின் புதிய விதி உள்ளது).
+* **Production:** இது நேரடி லைவ் ரிலீஸ். கூகுள் டீம் முழுமையாக ரிவியூ செய்த பின், ஆப் உலக மக்கள் அனைவருக்கும் டவுன்லோட் செய்யக் கிடைக்கும்."</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Print Button -->
+    <button class="float-btn" onclick="window.print()">
+        🖨️ Print / Save as PDF
+    </button>
+
+    <script>
+        // Active Sidebar T.O.C highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

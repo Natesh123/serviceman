@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirt2Tidy - Bilingual Interview Preparation Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent-eng: #0f766e;
+            --accent-eng-bg: #f0fdfa;
+            --accent-tam: #b45309;
+            --accent-tam-bg: #fffbeb;
+            --border-color: #e2e8f0;
+            --sidebar-width: 320px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #ffffff;
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-brand span {
+            color: var(--primary);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .toc-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .toc-link.active {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 3rem 4rem;
+            max-width: 1100px;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-eng {
+            background-color: var(--accent-eng-bg);
+            color: var(--accent-eng);
+        }
+
+        .badge-tam {
+            background-color: var(--accent-tam-bg);
+            color: var(--accent-tam);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            color: #0f172a;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .question-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .question-num {
+            color: var(--primary);
+        }
+
+        /* Answer Blocks */
+        .answer-block {
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .answer-eng {
+            background-color: var(--accent-eng-bg);
+            border-left: 4px solid var(--accent-eng);
+        }
+
+        .answer-tam {
+            background-color: var(--accent-tam-bg);
+            border-left: 4px solid var(--accent-tam);
+        }
+
+        .answer-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .label-eng {
+            color: var(--accent-eng);
+        }
+
+        .label-tam {
+            color: var(--accent-tam);
+        }
+
+        .answer-text {
+            font-size: 1.05rem;
+            color: #334155;
+            white-space: pre-line;
+        }
+
+        /* Float Action Button */
+        .float-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            z-index: 100;
+        }
+
+        .float-btn:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        /* Print Media Styles - optimized for PDF creation */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                display: block;
+            }
+
+            .sidebar, .float-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .question-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+
+            .answer-block {
+                page-break-inside: avoid;
+                background-color: #f8fafc !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+
+            .section-title {
+                page-break-before: always;
+            }
+
+            h1, .section-title {
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar T.O.C -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span>Dirt2Tidy</span> Guide
+        </div>
+        <ul class="toc-list">
+            <li class="toc-item"><a href="#arch" class="toc-link">1. Architecture & Design</a></li>
+            <li class="toc-item"><a href="#flutter" class="toc-link">2. Flutter & Mobile Apps</a></li>
+            <li class="toc-item"><a href="#backend" class="toc-link">3. Backend & Database</a></li>
+            <li class="toc-item"><a href="#sync" class="toc-link">4. Offline Sync & Performance</a></li>
+            <li class="toc-item"><a href="#security" class="toc-link">5. Payments & Security</a></li>
+            <li class="toc-item"><a href="#behavioral" class="toc-link">6. Behavioral Questions</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+        <header>
+            <div class="badge-container">
+                <span class="badge badge-eng">📘 English Answers</span>
+                <span class="badge badge-tam">📙 தமிழ் விளக்கம்</span>
+            </div>
+            <h1>Interview Preparation Guide</h1>
+            <div class="subtitle">Complete Technical Guide for the Dirt2Tidy Home Services Ecosystem</div>
+        </header>
+
+        <!-- SECTION 1 -->
+        <section id="arch">
+            <h2 class="section-title">1. High-Level System Architecture & Design</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q1.</span>
+                    <span>Can you explain the overall system architecture of Dirt2Tidy?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Dirt2Tidy is designed as a decoupled, multi-tenant B2C & B2B on-demand marketplace. It utilizes a **headless backend architecture** built with **Laravel (PHP)** that serves secure RESTful APIs to three separate client applications:
+1. **Customer Web Portal / Mobile App (Vue.js & Flutter):** Allows users to browse, book services, chat, and make payments.
+2. **Provider App (Flutter):** A dedicated application for cleaning agencies to manage bookings, track earnings, and delegate tasks.
+3. **Serviceman App (Flutter):** A lightweight utility application for ground cleaners featuring offline sync, GPS tracking, and quality validation.
+
+Centralized database management is handled by **MySQL**, and real-time features (chat, push notifications, auth state) are orchestrated using **Firebase (FCM, Firestore)**."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"Dirt2Tidy-ங்கிறது ஒரு மல்டி-ஆப் பிளாட்பார்ம். இதுல சென்ட்ரல் பேக்கெண்ட் வந்து **Laravel (PHP)**-ல பண்ணிருக்கோம். இதுல இருந்துதான் எல்லா ஆப்ஸ்க்கும் (Customer, Provider, Serviceman) தேவையான டேட்டாக்கள் **APIs** மூலமா போகும்.
+* கஸ்டமர் தங்களோட சேவைகளை புக் பண்ண **Vue.js & Flutter** பயன்படுத்திருக்கோம்.
+* ப்ரொவைடர் (ஏஜென்சி ஓனர்ஸ்) வேலைகளை நிர்வகிக்க தனி **Flutter App** இருக்கு.
+* வேலை செய்யுற சர்வீஸ்மேன் (கிளீனர்ஸ்) பயன்படுத்த தனி **Flutter App** இருக்கு.
+* டேட்டாபேஸ்-க்கு **MySQL** மற்றும் ரியல்-டைம் மெசேஜிங் / நோட்டிபிகேஷன்ஸ்க்கு **Firebase** பயன்படுத்திருக்கோம்."</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q2.</span>
+                    <span>Why did you choose a multi-app architecture instead of one single "Super App" for all roles?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Separating the applications provides several architectural benefits:
+* **Security & RBAC (Role-Based Access Control):** Servicemen on the ground should not have access to financial transaction details or the broad scheduling mechanisms available to Providers. By decoupling apps, we establish physical code security.
+* **Performance & App Size:** Combining the heavy dependencies of all three apps (like map rendering, charts, and image processors) would result in a massive APK size. Decoupled apps stay lightweight (under 30MB each).
+* **Code Maintenance:** Updates or hotfixes to the Serviceman app's checklist sync do not impact the customer booking pipeline, preventing regressions."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"ஒரே ஆப்பா (Super App) பண்ணாம ஏன் 3 தனித்தனி ஆப்ஸா பண்ணோம்னா:
+* **பாதுகாப்பு (Security):** சர்வீஸ்மேனுக்கு கஸ்டமரோட முழு பேமெண்ட் டீடைல்ஸ் தெரியக்கூடாது. ப்ரொவைடருக்கு கிளீனரோட வேலைகள் மட்டும் தான் தெரியணும். தனித்தனி ஆப்பா இருந்தா தான் செக்யூரிட்டி நல்லா இருக்கும்.
+* **ஆப் சைஸ் (App Size):** எல்லாத்தையும் ஒரே ஆப்புக்குள்ள போட்டா ஆப் சைஸ் ரொம்ப பெருசாகிடும், போன் ஹேங் ஆகும்.
+* **மெயின்டனன்ஸ் (Maintenance):** சர்வீஸ்மேன் ஆப்ல ஒரு அப்டேட் போடும்போது கஸ்டமர் ஆப்ல எந்த பாதிப்பும் வராம இருக்க இது உதவும்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="flutter">
+            <h2 class="section-title">2. Flutter & Mobile Application Deep Dives</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q3.</span>
+                    <span>Which State Management solution did you use in the Flutter apps, and why?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"I implemented **GetX** for state management and dependency injection across the Flutter applications. 
+* **Why GetX:** GetX provides high performance and keeps code clean by separating UI from business logic using controllers. Its route management does not require `BuildContext`, allowing us to trigger navigation directly from controllers (e.g., navigating to the chat screen upon receiving a background push notification)."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"நம்ம பிளட்டர் ஆப்ஸ்ல ஸ்டேட் மேனேஜ்மென்ட்க்கு **GetX** பயன்படுத்திருக்கோம்.
+* **ஏன் GetX:** இது ரொம்ப வேகமானது (Lightweight). இதோட `Controller` மூலமா டிசைனையும் (UI) கோடிங் லாஜிக்கையும் தனித்தனியா பிரிக்க முடியும்.
+* மேலும், Context இல்லாமலேயே ஒரு பேஜ்ல இருந்து இன்னொரு பேஜ்க்கு நேவிகேட் பண்ண இது ரொம்ப ஈஸியா இருக்கும் (உதாரணமா, பேக்ரவுண்ட்ல நோட்டிபிகேஷன் வரும்போது டைரக்டா சேட் ஸ்கிரீனுக்கு போக)."</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q4.</span>
+                    <span>How did you implement and manage the Serviceman task checklist system?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"The checklist is dynamic and served by the Laravel backend based on the specific service booked. 
+1. When a job is started, the Serviceman app fetches the task list and caches it locally in SQLite via **Sqflite**.
+2. As the serviceman completes tasks, the local state updates reactively.
+3. To verify completion, the app enforces a **before-and-after photo upload protocol** using compressed image pipelines to minimize payload size."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"வேலை செய்யுற கிளீனர்களுக்கான செக்லிஸ்ட் டைனமிக்-ஆ வேலை செய்யும். அதாவது கஸ்டமர் என்ன புக் பண்றாங்களோ (உதாரணமா: பெட்ரூம் கிளீனிங், கிச்சன் கிளீனிங்) அதுக்கேத்த டாஸ்க்குகள் லாராவெல் பேக்கெண்ட்ல இருந்து வரும்.
+* வேலை ஆரம்பிச்சதும், இந்த டாஸ்க்குகள் மொபைலோட லோக்கல் டேட்டாபேஸ்ல (**SQLite/Sqflite**) சேவ் ஆகிடும்.
+* சர்வீஸ்மேன் ஒவ்வொரு வேலையா முடிக்கும்போது டிக் பண்ணுவாங்க.
+* வேலையோட உண்மைத்தன்மையை உறுதி செய்ய, வேலைக்கு முன்னாடியும் (Before) பின்னாடியும் (After) போட்டோ எடுத்து அப்லோட் பண்ற ஆப்ஷனை கட்டாயமாக்கியிருக்கோம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="backend">
+            <h2 class="section-title">3. Backend, APIs & Database Design (Laravel & Vue.js)</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q5.</span>
+                    <span>How does the dynamic variant pricing engine work in the backend?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Home services cannot have flat-rate pricing due to variable factors. 
+* **Database Schema:** We structured the database with tables for `Services`, `Variants` (e.g., Bedroom count), `PricingRules` (e.g., Base price + incremental price), and `Extras` (e.g., Fridge clean).
+* **Calculation Pipeline:** When a customer configures a booking on the Vue.js frontend, a dynamic JSON payload of the selections is evaluated by a Laravel service class. This service applies calculations (e.g., base service cost + variable factors - active coupon discounts + tax) and returns an itemized breakdown. This same calculation engine is called during checkout to prevent frontend tampering."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"வீடு கிளீனிங் சர்வீஸ்ல பிக்ஸட் ரேட் வைக்க முடியாது (ஏன்னா பெட்ரூம்ஸ், பாத்ரூம்ஸ் எண்ணிக்கை மாறலாம்).
+* அதனால டேட்டாபேஸ்ல `Services`, `Variants` (அளவு/எண்ணிக்கை), `PricingRules` (விலை விதிகள்)னு பிரிச்சு வச்சிருக்கோம்.
+* கஸ்டமர் வெப்சைட்ல செலக்ட் பண்ணும்போது, அந்த டேட்டா லாராவெல் (Laravel) பேக்கெண்ட்டுக்கு போகும். அங்க ஒரு கால்குலேஷன் கிளாஸ் மூலமா பேஸ் ப்ரைஸ் + எக்ஸ்ட்ரா சார்ஜ் எல்லாம் கணக்கிடப்பட்டு பில் ஜெனரேட் ஆகும். இது செக்யூரிட்டிக்கு ரொம்ப முக்கியம் (யாரும் பிரண்ட் எண்ட்ல விலையை மாத்த முடியாது)."</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q6.</span>
+                    <span>How did you design secure RESTful APIs for the mobile apps?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"We implemented standard **REST API best practices** in Laravel:
+* **Authentication:** Secured all mobile API endpoints using **Laravel Sanctum** (token-based auth).
+* **Validation & Middleware:** Handled inputs through Form Requests to prevent SQL injections or malformed inputs.
+* **API Resource Controllers:** Used Laravel API Resources to format model responses cleanly, ensuring the mobile clients only receive the exact fields they require (reducing payload size)."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"மொபைல் ஆப்ஸ்க்கான APIs-ஐ ரொம்ப செக்யூரா பண்ணிருக்கோம்:
+* **Laravel Sanctum** பயன்படுத்தி டோக்கன் முறையில் யூசர் லாகின் செக்யூரிட்டியை மெயின்டைன் பண்றோம்.
+* டேட்டா இன்புட்ஸை செக் பண்ண **Form Requests** வேலிடேஷன் வச்சிருக்கோம், இதனால ஹேக்கிங் (SQL injection) தடுக்கப்படும்.
+* தேவையில்லாத டேட்டாவை பில்டர் பண்ணி, ஆப்புக்கு தேவையான ஃபீல்டுகளை மட்டும் அனுப்ப **API Resources**-ஐப் பயன்படுத்தியிருக்கோம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="sync">
+            <h2 class="section-title">4. Offline Synchronization & Performance Tuning</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q7.</span>
+                    <span>Can you explain the "SafeSync" offline-first synchronization logic?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Field servicemen often work in remote areas or basements with poor network signals. 
+* **Local Storage:** The Serviceman app uses a local **Sqflite** database. When a job is active, all checklist updates and timestamps are written locally first.
+* **Synchronization Worker:** We engineered a background synchronization manager that listens to network connectivity changes (via the `connectivity_plus` package).
+* **Conflict Resolution:** We apply a **timestamp-based LWW (Last-Write-Wins)** strategy. When the network is restored, local queued transactions are dispatched sequentially to the `/api/sync` endpoint, ensuring data integrity."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"சர்வீஸ்மேன் நெட்வொர்க் இல்லாத பேஸ்மென்ட் அல்லது ரிமோட் ஏரியாக்கள்ல வேலை செய்யும்போது ஆப் ஒர்க் ஆகணும்:
+* அதுக்காக **Sqflite** லோக்கல் டேட்டாபேஸ் பயன்படுத்திருக்கோம். நெட் இல்லாட்டியும் வேலை முடியும் வரை எல்லா டேட்டாவும் போன்லயே சேவ் ஆகும்.
+* மொபைலுக்கு திரும்ப நெட்வொர்க் வந்ததும், பேக்ரவுண்ட்ல ரன் ஆகுற சிங்க் மேனேஜர் லோக்கல் டேட்டாவை சர்வர்ல அப்டேட் பண்ணிடும்.
+* டேட்டா கொலிஷன் (முரண்பாடு) வராம இருக்க **LWW (Last-Write-Wins)** முறையை வச்சு, கடைசியா அப்டேட் பண்ண டைம்ஸ்டாம்பை வச்சு சர்வர்ல சின்க் பண்ணுவோம்."</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q8.</span>
+                    <span>How did you handle file uploads (like before/after photos) efficiently on mobile?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"Raw high-resolution smartphone photos can easily be 5MB–10MB. Uploading multiple files would exhaust mobile data and cause requests to timeout.
+* **Compression:** We created a utility class utilizing `flutter_image_compress` to automatically scale down photos to a maximum resolution of 1080p and a JPEG quality of 80%, reducing file size by **90%** (from ~6MB to ~300KB) with zero visible loss of quality."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"போன்ல எடுக்குற போட்டோஸ் 5MB-க்கு மேல இருக்கும். அத்தனை போட்டோஸையும் அப்படியே அப்லோட் பண்ணா நெட்வொர்க் ஸ்லோ ஆகி அப்லோட் ஃபெயில் ஆகும்.
+* அதுக்காக **`flutter_image_compress`** பேக்கேஜ் வச்சு, போட்டோவோட தரத்தை குறைக்காம, சைஸை மட்டும் 90% குறைச்சு (5MB போட்டோவை வெறும் 300KB ஆக்கி) சர்வர்ல ஈஸியா அப்லோட் ஆகுற மாதிரி பண்ணிருக்கோம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section id="security">
+            <h2 class="section-title">5. Security, Payments & Third-Party Integrations</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q9.</span>
+                    <span>How did you handle payments, and what security measures were in place?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"We integrated **SumUp** and standard Card payment gateways.
+* **Card Tokens:** We never store raw credit card details on our servers. The frontend collects card inputs and tokenizes them directly through the payment gateway's secure iframe. The token is then sent to our Laravel backend to process the transaction.
+* **Tamper Prevention:** Pricing calculations are calculated *on the backend* right before charge execution, using stored database records rather than trustable client-side values."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"பேமெண்ட்ஸ்க்கு **SumUp** மற்றும் கார்டு பேமெண்ட்ஸ் பயன்படுத்திருக்கோம்:
+* கார்டு விபரங்களை நம்ம சர்வர்ல சேவ் பண்ணவே மாட்டோம். பேமெண்ட் கேட்கவேயோட டோக்கனை மட்டுமே வாங்கி லாராவெல் வழியா டிரான்ஸாக்ஷன் நடத்துவோம் (PCI Compliance பாதுகாப்பு விதிப்படி).
+* கஸ்டமர் விலையை ஏமாத்தாம இருக்க, பேமெண்ட் நடக்குறதுக்கு ஒரு மில்லிசெகண்ட் முன்னாடி பேக்கெண்ட்ல (Laravel) இருந்து விலையை ரீ-கால்குலேட் பண்ணி சார்ஜ் பண்ணுவோம்."</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q10.</span>
+                    <span>Explain the Facebook Lead Sync / CRM integration. How did you resolve data sync issues?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"We integrated **Facebook Webhooks** to capture leads generated from social media ad campaigns directly into our Laravel backend.
+* **Identity Resolution:** We verified our Facebook Business Account to gain Advanced Access. When a webhook triggers, our backend calls the Facebook Graph API to pull the actual lead details and registers them as a prospect in our CRM database.
+* **Error Handling:** Webhook failures are mitigated by a robust queue system with an exponential backoff retry mechanism."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"பேஸ்புக் விளம்பரங்கள்ல வர்ற லீட்ஸ் (Leads)-ஐ டைரக்டா நம்ம அட்மின் பேனலுக்கு கொண்டு வர **Facebook Webhooks** செட் பண்ணிருக்கோம்.
+* வெப்ஹூக் ட்ரிகர் ஆனதும், பேஸ்புக் கிராஃப் API-ஐ கால் பண்ணி லீட் விபரங்களை (Name, Phone) எடுத்து நம்ம CRM டேட்டாபேஸ்ல போடுவோம்.
+* ஒருவேளை நெட்வொர்க் எர்ரர் வந்தா, டேட்டா மிஸ் ஆகாம இருக்க **Laravel Jobs/Queues** பயன்படுத்தி ரீ-ட்ரை (Retry) பண்ண வைப்போம்."</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section id="behavioral">
+            <h2 class="section-title">6. Behavioral & Scenario-Based Questions</h2>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q11.</span>
+                    <span>Tell me about a challenging bug you resolved in this project.</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"One of the most complex bugs was a Gradle build crash during release compilation (`:app:stripReleaseDebugSymbols`) on Windows. The compiler would exit with an unhelpful `MD5 hash calculation failed as the file does not exist` error for `libapp.so.temp-stream`.
+* **Investigation & Resolution:** I realized it was a Windows file-lock race condition where the temp file got deleted before Gradle could hash it. I resolved this by adding `packagingOptions` with a `doNotStrip` directive targeting `libapp.so` and `libflutter.so` in `build.gradle`, bypassing the crash completely."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"இந்த ப்ராஜெக்ட்ல நாங்க பேஸ் பண்ண ஒரு பெரிய பக்: விண்டோஸ் சிஸ்டம்ல ரிலீஸ் APK பில்ட் பண்ணும்போது `:app:stripReleaseDebugSymbols` டாஸ்க்ல கிராஷ் ஆகும். `temp-stream` ஃபைல் இல்லைனு எர்ரர் காட்டும்.
+* **காரணம் & தீர்வு:** விண்டோஸ் ஃபைல் சிஸ்டம்ல ஏற்படுற ஒரு ரேஸ் கண்டிஷன் (Race Condition) தான் காரணம். இத சரி பண்ண, ஆப்போட `build.gradle`-ல `packagingOptions { doNotStrip "**/libapp.so" }` நு சேர்த்து, அந்த ஃபைலை ஸ்ட்ரிப் பண்ணாம ஸ்கிப் பண்ண வச்சேன். பில்ட் 100% சக்சஸ் ஆச்சு!"</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-num">Q12.</span>
+                    <span>How did you ensure smooth performance across different Android and iOS screen sizes?</span>
+                </div>
+                
+                <div class="answer-block answer-eng">
+                    <div class="answer-label label-eng">📘 English Answer (For Interview)</div>
+                    <div class="answer-text">"In Flutter, we strictly avoided hardcoded screen dimensions. Instead:
+* We utilized the **`LayoutBuilder`** and **`MediaQuery`** widgets to dynamically compute ratios based on screen size.
+* We implemented responsive libraries like `flutter_screenutil` to scale typography and spacing dynamically.
+* For complex lists, we heavily utilized lazy loading via `ListView.builder` to minimize memory overhead."</div>
+                </div>
+
+                <div class="answer-block answer-tam">
+                    <div class="answer-label label-tam">📙 Tamil Explanation (புரிந்துகொள்ள)</div>
+                    <div class="answer-text">"பிளட்டர்ல எந்த ஸ்கிரீனுக்கும் பிக்சல் வேல்யூவை ஹார்ட்கோட் (Hardcode) பண்ண மாட்டோம்:
+* அதுக்கு பதிலா **`MediaQuery`** மற்றும் **`LayoutBuilder`** வச்சு ஸ்கிரீன் சைஸ்க்கு ஏத்த மாதிரி விட்ஜெட்களை தானா அட்ஜஸ்ட் பண்ண வைப்போம்.
+* டெக்ஸ்ட் மற்றும் ஸ்பேஸிங்க்கு `flutter_screenutil` பயன்படுத்திருக்கோம்.
+* லிஸ்ட் வியூஸ்களுக்கு `ListView.builder` (Lazy loading) வச்சிருக்கோம், இதனால லோ-எண்ட் போன்களிலும் ஆப் ஹேங் ஆகாம ரொம்ப ஸ்மூத்தா ஓடும்."</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Print Button -->
+    <button class="float-btn" onclick="window.print()">
+        🖨️ Print / Save as PDF
+    </button>
+
+    <script>
+        // Active Sidebar T.O.C highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
