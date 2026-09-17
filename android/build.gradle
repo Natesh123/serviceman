@@ -1,11 +1,11 @@
 
 // Force configuration properties for all plugins
 ext {
-    compileSdkVersion = 35
+    compileSdkVersion = 36
     minSdkVersion = 21
     targetSdkVersion = 35
     flutter = [
-        compileSdkVersion: 35,
+        compileSdkVersion: 36,
         minSdkVersion: 21,
         targetSdkVersion: 35,
         versionCode: 1,
@@ -29,7 +29,7 @@ subprojects {
     afterEvaluate { project ->
         if (project.hasProperty('android')) {
             project.android {
-                compileSdkVersion 35
+                compileSdkVersion 36
                 if (namespace == null) {
                     namespace project.group
                 }

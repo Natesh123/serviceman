@@ -1,4 +1,4 @@
-package com.dirt2tidy.servicemann
+package com.dirt2tidy.serviceman
 
 import io.flutter.embedding.android.FlutterActivity
 

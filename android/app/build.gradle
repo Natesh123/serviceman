@@ -32,8 +32,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.dirt2tidy.servicemann"
-    compileSdk = 35
+    namespace "com.dirt2tidy.serviceman"
+    compileSdk = 36
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -46,7 +46,7 @@ android {
         jvmTarget = "21"
     }
     defaultConfig {
-        applicationId "com.dirt2tidy.servicemann"
+        applicationId "com.dirt2tidy.serviceman"
         minSdkVersion 24
         targetSdk = 35
         versionCode flutterVersionCode.toInteger()
