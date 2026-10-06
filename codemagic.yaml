@@ -40,7 +40,8 @@ workflows:
           find . -name "Podfile" -execdir pod install \;
       - name: Flutter build ipa and automatic versioning
         script: |
-          flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+          NEW_BUILD_NUMBER=$(($BUILD_NUMBER + 150))
+          flutter build ipa --release --build-number=$NEW_BUILD_NUMBER --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
